@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>재고 등록</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #ddebfd;
+        }
+    </style>
+</head>
+<body>
+
+<h1>재고 등록
+    <a th:href="@{/stock}" style="margin-left: 10px;">
+        <button style="background-color: #44bf4c; color: white; padding: 5px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            재고 목록으로 돌아가기
+        </button>
+    </a>
+</h1>
+
+
+<form th:action="@{/stock}" method="post">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
+        <table style="width: 90%; margin-right: 20px;">
+            <thead>
+            <tr>
+                <th>재료 이름</th>
+                <th>카테고리</th>
+                <th>구입량</th>
+                <th>원가</th>
+                <th>구입처</th>
+                <th>구입 날짜</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td><label style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <input style="text-align: center; width: 100px; height: 20px;" type="text" name="name" required/>
+                </label></td>
+
+                <td>
+                    <label style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                        <select name="stockCategory" required>
+                            <option value="" disabled selected>카테고리 선택</option>
+                            <option th:each="category : ${categories}"
+                                    th:value="${category.name()}"
+                                    th:text="${category.name()}">
+                            </option>
+                        </select>
+                    </label>
+                </td>
+
+                <td><label style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <input style="text-align: center; width: 100px; height: 20px;" type="number" name="purchaseQuantity"
+                           required/>
+                </label></td>
+
+                <td><label style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <input style="text-align: center; width: 100px; height: 20px;" type="number" name="cost" required/>
+                </label></td>
+
+                <td><label style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <input style="text-align: center; width: 100px; height: 20px;" type="text" name="purchasePlace"
+                           required/>
+                </label></td>
+
+                <td><label style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <input type="date" name="purchaseDate" required/>
+                </label></td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit"
+                style="background-color: #44bf4c; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            등록
+        </button>
+    </div>
+</form>
+</body>
+</html>
