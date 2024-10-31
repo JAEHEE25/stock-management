@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>매출 입력</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .sale-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 320px;
+        }
+
+        .sale-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 20px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .input-button {
+            width: 80%;
+            padding: 15px;
+            background-color: #2380c2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .input-button:hover {
+            background-color: #1e70a8;
+        }
+
+        .back-button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            justify-content: center;
+            width: 200px;
+            padding: 5px 20px;
+            background-color: #44bf4c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form class="sale-form" th:action="@{/sale}" method="post">
+        <div class="sale-title">매출 입력</div>
+
+        <input type="text" id="autocompleteInput" list="options" name="menu" placeholder="메뉴">
+
+        <datalist id="options">
+            <option th:each="menu : ${menus}"
+                    th:value="${menu.getName()}">
+            </option>
+        </datalist>
+        <input type="number" id="saleQuantity" name="saleQuantity" placeholder="수량" required/>
+        <button type="submit" class="input-button">입력</button>
+    </form>
+</div>
+
+<div class="back-button-container">
+    <a th:href="@{/stock}">
+        <button type="button" class="back-button">재고 목록으로 돌아가기</button>
+    </a>
+</div>
+</body>
+</html>
