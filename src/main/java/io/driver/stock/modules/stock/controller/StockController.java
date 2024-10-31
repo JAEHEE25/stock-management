@@ -20,8 +20,10 @@ public class StockController {
 	private final StockService stockService;
 
 	@GetMapping
-	public String getStockList(Model model) {
-		List<Stock> stocks = stockService.getStocks();
+	public String getStockList(Model model, @RequestParam(required = false, name = "category") StockCategory category) {
+		List<Stock> stocks = stockService.getStocksByCategory(category);
+		model.addAttribute("categories", StockCategory.values());
+		model.addAttribute("selectedCategory", category);
 		model.addAttribute("stocks", stocks);
 		return "stock/list";
 	}

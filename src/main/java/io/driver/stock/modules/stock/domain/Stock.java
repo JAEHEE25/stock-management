@@ -54,4 +54,8 @@ public class Stock {
 		this.purchaseDate = newStock.getPurchaseDate();
 		this.currentQuantity = newStock.getCurrentQuantity();
 	}
+
+	public void changeCurrentQuantity(int newQuantity) {
+		this.currentQuantity = newQuantity;
+	}
 }

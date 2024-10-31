@@ -23,18 +23,53 @@
             height: 40px;
             text-align: center;
         }
+
+        .category-tag {
+            display: inline-block;
+            padding: 2px 15px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            margin-left: 5px;
+            border-radius: 20px;
+            border: 1px solid #2380c2;
+            color: #2380c2;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .category-tag.selected {
+            background-color: #2380c2;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
 
 <h1>재고 목록
+    <a th:href="@{/sale}" style="margin-left: 10px;">
+        <button style="background-color: #4e86ff; color: white; padding: 5px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            매출 입력하기
+        </button></a>
     <a th:href="@{/stock/post}" style="margin-left: 10px;">
         <button style="background-color: #44bf4c; color: white; padding: 5px 20px; border: none; border-radius: 5px; cursor: pointer;">
             재고 등록하기
-        </button>
-    </a>
+        </button></a>
 </h1>
+
+<div>
+    <a th:href="@{/stock}" class="category-tag"
+       th:classappend="${selectedCategory == null ? 'selected' : ''}">
+        All
+    </a>
+    <a th:each="category : ${categories}"
+       th:href="@{/stock(category=${category})}"
+       th:text="${category.name()}"
+       class="category-tag"
+       th:classappend="${selectedCategory == category ? 'selected' : ''}">
+    </a>
+</div>
 
 <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
     <table style="width: 90%; margin-right: 20px;">

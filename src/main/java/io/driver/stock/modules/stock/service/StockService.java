@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.driver.stock.modules.stock.domain.Stock;
+import io.driver.stock.modules.stock.domain.StockCategory;
 import io.driver.stock.modules.stock.domain.StockRepository;
 import io.driver.stock.modules.stock.model.StockModifyRequest;
 import io.driver.stock.modules.stock.model.StockPostRequest;
@@ -18,7 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 public class StockService {
 	private final StockRepository stockRepository;
 
-	public List<Stock> getStocks() {
+	public List<Stock> getStocksByCategory(StockCategory category) {
+		if (category != null) {
+			return stockRepository.findAllByStockCategory(category);
+		}
 		return stockRepository.findAll();
 	}
 
